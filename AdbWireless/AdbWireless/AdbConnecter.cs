@@ -9,7 +9,12 @@ namespace AdbWireless
     {
         static Regex regex = new Regex($"connected to (.+?){Environment.NewLine}");
 
-        public static async Task<bool> Connect(string ipAddress)
+        public static Task<bool> ConnectAsync(AndroidDevice device)
+        {
+            return ConnectAsync(device.IPAddress);
+        }
+
+        public static async Task<bool> ConnectAsync(string ipAddress)
         {
             var process = Process.Start(new ProcessStartInfo
             {
